@@ -1,0 +1,16 @@
+// 1. 如果 promise 和 x 引用了同一个对象， 使用 TypeError 作为失败原因调用 reject promise
+
+
+let promise = new Promise((resolve, reject) => {
+  resolve('ok')
+})
+
+
+let promise2 = promise.then(() => {
+  return promise2
+})
+
+promise2.then(() => {
+}, err => {
+  console.log(err)
+})

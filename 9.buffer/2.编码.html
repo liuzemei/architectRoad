@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <input type="file" id=file>
+
+
+  <!-- 前端实现下载功能 -->
+
+  <script>
+    let str = `<h2>你好 欢迎</h2>` // excell 下载到本地
+
+    // blob 文件格式
+
+    // let blob = new Blob([str], {
+    //   type: 'text/html'
+    // })
+    // console.log(blob)
+    // 可以用 视图来读取 或者 用 fileReader
+
+    // 1. 文件下载
+    // let aElement = document.createElement('a')
+    // aElement.setAttribute('download', 'index.html');
+    // aElement.href = URL.createObjectURL(blob); // 产生一个临时的路径
+    // aElement.click()
+    // document.body.appendChild(aElement)
+
+    // 2. 文件预览
+    // file.addEventListener('change', e => {
+    //   let file = e.target.files[0] // File 就是 Blob 类型的子类
+    //   let img = new Image()
+    //   img.src = URL.createObjectURL(file) // 创建一个临时路径
+    //   console.log(img.src)
+    //   URL.revokeObjectURL(img.src) // 释放路径
+    //   document.body.appendChild(img)
+
+    // })
+
+    // 3. FileReader
+    // file.addEventListener('change', e => {
+    //   let file = e.target.files[0] // File 就是 Blob 类型的子类
+    //   let fileReader = new FileReader();
+    //   fileReader.onload = function () {
+    //     let img = new Image()
+    //     img.src = fileReader.result
+    //     document.body.appendChild(img)
+    //   }
+    //   fileReader.readAsDataURL(file);
+    // })
+
+    // 浏览器是有二进制对象的
+
+
+
+
+
+
+    // aElement.
+
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <script>
+    // 微任务 会在渲染之前执行
+    document.body.style.background = 'red'
+    console.log(1)
+    Promise.resolve().then(() => {
+      console.log(2)
+      setTimeout(() => {
+        document.body.style.background = 'yellow'
+
+      });
+    })
+    console.log(3)
+  </script> -->
+
+
+  <button id="button">click</button>
+  <script>
+    button.addEventListener('click', () => {
+      console.log('listener1')
+      button.click()
+      Promise.resolve().then(() => console.log('micro task1'))
+    })
+    button.addEventListener('click', () => {
+      console.log('listener2')
+      Promise.resolve().then(() => console.log('micro task2'))
+    })
+    button.click()  // 这种属于微任务，没有点的过程，就是宏任务
+
+    // 点击时，是一个一个的宏任务取出来执行，所以是一个函数 一个函数调用
+
+  </script>
+
+
+</body>
+
+</html>
