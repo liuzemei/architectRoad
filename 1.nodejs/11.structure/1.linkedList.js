@@ -70,17 +70,6 @@ class Node {
 
 let ll = new LinkList()
 
-
-ll.add(0, 100)
-ll.add(0, 200)
-ll.add(300) // 没有给索引，就是末尾添加
-// ll.remove(0)
-
-console.log(ll)
-
-ll.reverse()
-console.log(ll)
-
 class Queue { // 实现一个队列  FIFO
   constructor() {
     this.ll = new LinkList()

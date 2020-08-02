@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+
+  <script src="/dist/umd/vue.js"></script>
+
+  <script>
+    // options API 通过一个选项进行配置
+    let vm = new Vue({
+      el: '#app',
+      data() {
+        return { arr: [{ a: 123, b: 234 }, 2, 3] }
+      }
+    })
+
+    // 默认弄个数据会的递归去用 defineProperty 进行拦截，性能差 -> proxy
+    // { a: { a: { a: 1 } } } 取里层的 a 需要 访问 3次 get
+
+    // vm._data.a = { b: 1 }
+    // vm._data.a.b = 100
+
+
+    // 我们开发功能时很少对数组索引进行操作，为了性能考虑不对数组进行拦截
+    // 拦截可以改变数组的操作进行操作
+    // console.log(vm._data.a[1])
+
+
+    vm._data.arr[0].b = 123
+
+
+  </script>
+</body>
+
+</html>

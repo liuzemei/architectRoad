@@ -1,8 +1,10 @@
+//  多路径和多函数处理
+// 路径和处理函数是一个一对多的关系
 const express = require('./express')
 
 const app = express()
 
-//  路径和处理函数是一个一对多的关系
+//  
 
 
 app.get('/', (req, res, next) => {
