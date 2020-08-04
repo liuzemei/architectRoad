@@ -179,6 +179,9 @@
     observe(data);
   }
 
+  function compileToFunctions(template) {
+  }
+
   function initMixin(Vue) {
     Vue.prototype._init = function (options) {
       var vm = this;
@@ -188,6 +191,30 @@
       initState(vm); // vue 里边核心特性 响应式数据源里
       // Vue 是一个什么样的框架 MVVM
       // 数据变化视图会更新，视图变化数据会被影响（MVVM: 不能跳过数据区更新视图，但是Vue没有遵循MVVM，$ref）
+      // 如果当前有 el 属性，说明要渲染模板
+
+      if (vm.$options.el) {
+        vm.$mount(vm.$options.el);
+      }
+    };
+
+    Vue.prototype.$mount = function (el) {
+      // 挂载操作
+      var vm = this;
+      var opts = vm.$options;
+      el = document.querySelector(el);
+
+      if (!opts.render) {
+        // 没 render
+        var template = opts.template;
+
+        if (!template && el) {
+          template = el.outerHTML;
+        }
+
+        var render = compileToFunctions();
+        opts.render = render;
+      }
     };
   }
 

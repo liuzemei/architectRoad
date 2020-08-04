@@ -8,7 +8,9 @@
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    hello {{name}}<span>world</span>
+  </div>
 
 
   <script src="/dist/umd/vue.js"></script>
@@ -18,8 +20,12 @@
     let vm = new Vue({
       el: '#app',
       data() {
-        return { arr: [{ a: 123, b: 234 }, 2, 3] }
-      }
+        return { arr: [1, 2, 3], school: { name: 'zf', age: 10 } }
+      },
+      // render(h) {
+      //   return h('div', { id: 'a' }, 'hello')
+      // },
+      // template: `<div id='a'>hello</div>`
     })
 
     // 默认弄个数据会的递归去用 defineProperty 进行拦截，性能差 -> proxy
@@ -34,7 +40,15 @@
     // console.log(vm._data.a[1])
 
 
-    vm._data.arr[0].b = 123
+    // vm._data.arr[0].b = 123
+
+
+
+    // 渲染的操作
+    // 1）默认会找 render 方法
+    // 2）如果没有 render 方法，会查找 template
+    // 3）找当前的 el 指定的元素中的内容来进行渲染
+    // ast 解析 template => render 函数
 
 
   </script>

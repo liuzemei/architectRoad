@@ -21,6 +21,5 @@ export default {
       openPage: '/index.html', // 打开页面是谁
     })
   ],
-  
 }
 
