@@ -1,6 +1,7 @@
 const conn = require('../db')
 const { SchemaTypes, Schema } = require('mongoose')
 const plugin = require('../plugins/save')
+let crypto = require('crypto')
 
 
 const StudentSchema = Schema({
@@ -29,11 +30,18 @@ const StudentSchema = Schema({
   },
   password: {
     type: String,
-    set(newValue) {
-      return 'hello' + newValue
-    }
   }
 })
+
+// // 扩展 类 的方法  （集合）
+// StudentSchema.statics.findByName = function (username) {
+//   return this.findOne({ username })
+// }
+
+// // 扩展 实例的 方法 （文档）
+// StudentSchema.methods.savePassword = function (password) {
+//   this.password = crypto.createHash('md5', 'zf').update(password).digest('base64')
+// }
 
 
 StudentSchema.plugin(plugin, { secret: 'zf' })
