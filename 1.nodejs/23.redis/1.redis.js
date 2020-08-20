@@ -5,8 +5,8 @@ let client = redis.createClient(6379, '127.0.0.1')
 
 
 // 1. 存取
-// client.set('name', JSON.stringify({ name: 'zf' }), redis.print)
-// client.get('name', redis.print)
+client.set('name', JSON.stringify({ name: 'zf' }), redis.print)
+client.get('name', redis.print)
 
 
 // 发布订阅模式 清空缓存
