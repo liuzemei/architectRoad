@@ -1,7 +1,6 @@
-
 //  如果代码里有 export import 之类的代码，那么这个文件就变成了一个模块
 // 里面的变量都会成为私有变量
-export { }
+export {}
 let name: string = 'liuzemei'
 let age: number = 10
 let married: boolean = true
@@ -16,15 +15,16 @@ point[0], point[1];
 let person: [string, number] = ['刘泽美', 10];
 
 
-
 // 枚举类型
 // 1. 普通枚举
 enum Gender {
   Boy,
   Girl
 }
+
 console.log(`GG是${Gender.Boy}`)
 console.log(`MM是${Gender.Boy}`)
+
 enum Week {
   Monday = 1,
   Tuesday = 2
@@ -36,11 +36,13 @@ const enum Colors {
   Yellow,
   Blue
 }
+
 console.log(Colors.Red, Colors.Yellow, Colors.Blue)
 
 const enum Texts {
   A, B, C
 }
+
 console.log(Texts.A)
 
 // 任意类型 Anyscript
@@ -64,6 +66,7 @@ let x: number;
 function greeting(name: string): void {
   console.log(`hell ${name}`)
 }
+
 greeting('zhufeng')
 
 
@@ -78,7 +81,6 @@ function createErrror(message: string): never {
 }
 
 console.log(createErrror('hello'))
-
 
 
 // 类型推论 猜
