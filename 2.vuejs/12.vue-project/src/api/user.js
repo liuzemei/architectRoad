@@ -6,6 +6,8 @@ import axios from "./http";
 export const login = (options = {}) => {
   let { username, password, code, uid } = options;
   if (username && password && code && uid) {
-    return axios.post(config.login);
+    return axios.post(config.login, options);
   } else return Promise.reject("登录参数不正确");
 };
+
+export const validate = () => axios.get(config.validate)

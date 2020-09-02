@@ -23,20 +23,32 @@
         :router="true"
         active-text-color="#fff"
       >
-        <template v-if="true">
+        <template v-if="!userInfo.username">
           <el-menu-item index="/reg">注册</el-menu-item>
           <el-menu-item index="/login">登录</el-menu-item>
         </template>
 
         <el-submenu v-else>
-          <template slot="title">张三</template>
-          <el-menu-item>退出登录</el-menu-item>
+          <template slot="title">{{userInfo.username}}</template>
+          <el-menu-item @click="test">退出登录</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-col>
   </el-row>
 </template>
 
+<script>
+import { createNamespacedHelpers } from "vuex";
+let { mapState } = createNamespacedHelpers("user");
+export default {
+  computed: {
+    ...mapState(["userInfo"]),
+  },
+  methods: {
+    test() {},
+  },
+};
+</script>
 
 
 <style lang="scss" scoped>

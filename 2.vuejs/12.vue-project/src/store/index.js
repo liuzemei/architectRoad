@@ -16,6 +16,4 @@ files.keys().forEach((key) => {
   rootModules.modules[moduleName] = store;
 });
 
-console.log(rootModules);
-
 export default new Vuex.Store(rootModules);

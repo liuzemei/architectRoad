@@ -1,12 +1,26 @@
 // 对 axios 二次封装
-import axios from "axios";
+import axios, { CancelToken } from "axios";
+import store from '../store'
+import * as types from '../store/action-types'
+import { getLocal } from '../utils/local'
 
 // axios.interceptors.request.use((config) => {});
 
 // 封装的目的是封装公共的拦截器，每个实例有自己的拦截器。
+import { Loading } from 'element-ui'
+
+let loadingInstance;
+
+function startLoading() {
+  loadingInstance = Loading.service({ fullscreen: true })
+}
+function closeLoading() {
+  loadingInstance.close()
+}
 
 const instance = axios.create(); // 创建一个单独的实例，可以直接使用这个实例
 instance.interceptors.request;
+// 当页面切换时，删除不必要的请求
 class Http {
   constructor() {
     this.timeout = 3000; // 超时时间
@@ -15,17 +29,36 @@ class Http {
       process.env.NODE_ENV === "development"
         ? "http://www.fullstackjavascript.cn:8888"
         : "";
+
+    this.queue = {}; // 存放所有的请求队列 /getBannerList: true
   }
   mergeOptions(options) {
     return { timeout: this.timeout, baseURL: this.baseURL, ...options };
   }
-  setInterceptors(instance) {
+  setInterceptors(instance, url) {
     instance.interceptors.request.use((config) => {
-      return config;
+      // if (Object.keys(this.queue).length === 0) {
+      //   // 当前市所有请求中的第一个
+      //   startLoading()
+      // }
+      // this.queue[url] = true
+
+      config.cancelToken = new CancelToken((cancel) => {
+        store.commit(types.SET_REQUEST_TOKEN, cancel)
+      })
+
+      config.headers.authorization = 'Bearer ' + getLocal('token')
+
+
+      return config
     });
 
     instance.interceptors.response.use(
       (res) => {
+        delete this.queue[url]
+        // if (Object.keys(this.queue).length == 0) {
+        //   closeLoading()
+        // }
         if (res.status === 200) {
           if (res.data.err == 1) {
             return Promise.reject(res.data);
@@ -35,9 +68,11 @@ class Http {
           // 401 403 ...
           return Promise.reject(res);
         }
+
       },
       (err) => {
         // 失败直接返回失败的 promise
+        delete this.queue[url]
         return Promise.reject(err);
       }
     );
@@ -49,7 +84,7 @@ class Http {
 
     const axiosInstance = axios.create();
     // 添加拦截器
-    this.setInterceptors(axiosInstance);
+    this.setInterceptors(axiosInstance, opts.url);
     // 当调用 axios.request 时，内部会创建一个 axios 实例 并且给这个实例传入配置属性
     return axiosInstance(opts);
   }
