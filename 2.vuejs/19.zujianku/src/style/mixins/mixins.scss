@@ -1,0 +1,14 @@
+$namespace: "mixin-";
+
+@mixin blockquote($block) {
+  // 拼接前缀
+  $blockName: $namespace + $block;
+
+  .#{$blockName} {
+    @content;
+  }
+
+  $color-list: (
+    primary: $primary,
+  );
+}
